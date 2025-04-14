@@ -29,6 +29,24 @@
             <div class="spinner-border text-dark" role="status"></div>
         </div>
 
+        <div id="refreshNotice" style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #212529;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    font-size: 14px;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+">
+    Verhalen vernieuwd
+</div>
+
+
         <div class="container-lg">
             <div class="container">
                 <div id="verhalenContainer"></div>
@@ -59,15 +77,27 @@
                 const verhalenContainer = document.getElementById("verhalenContainer");
         
                 if (verhalenContainer) {
-                    fetch('stories.json')
+                    fetch(`stories.json?nocache=${new Date().getTime()}`)
                         .then(response => response.json())
                         .then(data => {
                             renderVerhalen(data);
+                            showRefreshNotice();
                         })
                         .catch(error => {
                             console.error("Error fetching verhalen:", error);
                         });
                 }
+            }
+
+            function showRefreshNotice() {
+                const notice = document.getElementById("refreshNotice");
+                if (!notice) return;
+
+                notice.style.opacity = 1;
+
+                setTimeout(() => {
+                    notice.style.opacity = 0;
+                }, 2000);
             }
         
             // Help functie om de logica voor checken distance ook te applyen op de json data vanuit stories.json

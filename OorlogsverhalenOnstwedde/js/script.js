@@ -52,6 +52,8 @@ function getLocation() {
             clearTimeout(timer);
             userLat = pos.coords.latitude;
             userLng = pos.coords.longitude;
+            console.log(userLat);
+            console.log(userLng);
             
             resolve();
         }, (err) => {
@@ -130,10 +132,17 @@ function loadVerhalen(){
         },
         {
             id: 8,
+            titel: "muziek huis sammy",
+            tekst: "jaja, t werkt",
+            afbeelding: "verhaal7.png",
+            locatie: { lat: 53.08585971940591 , lng: 6.978511096985318 }
+        },
+        {
+            id: 9,
             titel: "Test story",
             tekst: "jaja, t werkt",
             afbeelding: "verhaal7.png",
-            locatie: { lat: 53.08557714391873 , lng: 6.978023559773206 }
+            locatie: { lat: 53.08535107387255 , lng: 6.978246351710982 }
         },
     ];
 
