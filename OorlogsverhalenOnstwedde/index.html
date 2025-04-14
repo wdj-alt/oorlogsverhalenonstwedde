@@ -61,7 +61,7 @@
         <script>
         document.addEventListener("DOMContentLoaded", () => {
             // Refresh de verhalenContainer elke 6 seconden met de nieuwe locatie
-            setInterval(() => {
+            function refreshLoop(){
                 navigator.geolocation.getCurrentPosition(
                     position => {
                         userLat = position.coords.latitude;
@@ -77,8 +77,11 @@
                         console.warn("Location update failed:", error);
                     }
                 );
-                console.log("refreshed!")
-            }, 6000);
+
+                setTimeout(refreshLoop, 3000)
+            }
+
+            refreshLoop();
         
             // Fetch de data nu vanuit een json file
             function fetchVerhalen() {
