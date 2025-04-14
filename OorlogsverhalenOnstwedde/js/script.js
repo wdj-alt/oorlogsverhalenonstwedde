@@ -4,8 +4,9 @@ let userLng;
 
 document.addEventListener("DOMContentLoaded", async (event) => {
     const loadingElement = document.getElementById("loading");
-    loadingElement.style.display = "block"; // show loading
-
+    if (loadingElement){
+        loadingElement.style.display = "block";
+    }
     try {
         await getLocation();
         loadVerhalen();
@@ -14,14 +15,16 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         console.error("Error bij krijgen locatie", error);
         loadVerhalen();
     } finally {
-        loadingElement.style.display = "none"
+        if (loadingElement){
+            loadingElement.style.display = "none"
+        }
     }
 });
 
 function getLocation() {
     return new Promise((resolve, reject) => {
         const timeout = 5000;
-        
+
         const timer = setTimeout(() => {
             reject(new Error("Locatie ophalen duurde te lang."));
         }, timeout);
@@ -123,35 +126,33 @@ function loadVerhalen(){
         document.getElementById("tekst").textContent = verhaal.tekst;
         document.getElementById("nummer").textContent = "Verhaal " + verhaal.id;
         document.getElementById("afbeelding").src = "img/" + verhaal.afbeelding;
+        
+        let audio = null;
 
-        document.addEventListener("DOMContentLoaded", () => {
-            let audio = null;
-
-            function voorlezen(){
-                // Maak een nieuw audio object aan wanneer de audio null is || gepauzeerd.
-                if (!audio || audio.paused) {
-                    audio = new Audio(`sounds/verhaal${id}.mp3`);
-                }
-
-                // Wanneer niet gepauzeerd, pauzeer hem en zet de tijd op 0
-                if (!audio.paused){
-                    audio.pause();
-                    audio.currentTime = 0;
-                }
-                                    
-                // Speel geluid af van desbetrefende verhaal
-                audio.play()
+        function voorlezen(){
+            // Maak een nieuw audio object aan wanneer de audio null is || gepauzeerd.
+            if (!audio || audio.paused) {
+                audio = new Audio(`sounds/verhaal${id}.mp3`);
             }
 
-            // Creeer button net voor het element met id tekst, die onclick="Voorlezen()"
-            const button = document.createElement("button");
-                button.className = "btn btn-dark mb-4 mt-2";
-                button.innerHTML = '<i class="bi bi-volume-up"></i>';
-                button.addEventListener("click", voorlezen);
+            // Wanneer niet gepauzeerd, pauzeer hem en zet de tijd op 0
+            if (!audio.paused){
+                audio.pause();
+                audio.currentTime = 0;
+            }
+                                
+            // Speel geluid af van desbetrefende verhaal
+            audio.play()
+        }
 
-                const tekstID = document.getElementById("tekst");
-                tekstID.parentNode.insertBefore(button, tekstID);
-        });
+        // Creeer button net voor het element met id tekst, die onclick="Voorlezen()"
+        const button = document.createElement("button");
+            button.className = "btn btn-dark mb-4 mt-2";
+            button.innerHTML = '<i class="bi bi-volume-up"></i>';
+            button.addEventListener("click", voorlezen);
+
+            const tekstID = document.getElementById("tekst");
+            tekstID.parentNode.insertBefore(button, tekstID);
     } else {
         // Foreach de verhalen op de homepagina
         const container = document.getElementById("verhalenContainer");
