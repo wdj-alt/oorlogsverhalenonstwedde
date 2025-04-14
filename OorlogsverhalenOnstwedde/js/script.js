@@ -3,17 +3,29 @@ let userLat;
 let userLng;
 
 document.addEventListener("DOMContentLoaded", async (event) => {
+    // Laden
     const loadingElement = document.getElementById("loading");
     if (loadingElement){
         loadingElement.style.display = "block";
     }
+
+    // Probeer locatie op te halen, en laad de verhalen.
     try {
         await getLocation();
         loadVerhalen();
 
+    // Als geen locatie kan worden verkegen, door of rejection of timeout probeer dan nog 1 keer om toch de verhalen op te halen.
     } catch (error) {
         console.error("Error bij krijgen locatie", error);
-        loadVerhalen();
+        setTimeout(async () => {
+            try {
+                await getLocation();
+                loadVerhalen()
+            }
+            catch (error) {
+                loadVerhalen();
+            }
+        }, 1000);
     } finally {
         if (loadingElement){
             loadingElement.style.display = "none"
@@ -23,8 +35,8 @@ document.addEventListener("DOMContentLoaded", async (event) => {
 
 function getLocation() {
     return new Promise((resolve, reject) => {
-        const timeout = 5000;
-
+        const timeout = 6000;
+        // Zet 6 sec timer om maximaal de user zijn locatie op te halen, anders reject de promise.
         const timer = setTimeout(() => {
             reject(new Error("Locatie ophalen duurde te lang."));
         }, timeout);
@@ -35,12 +47,12 @@ function getLocation() {
             maximumAge: 0
         };
 
-
         // Vraag locatie op van de gebruiker
         navigator.geolocation.getCurrentPosition((pos) => {
             clearTimeout(timer);
             userLat = pos.coords.latitude;
             userLng = pos.coords.longitude;
+            
             resolve();
         }, (err) => {
             clearTimeout(timer);
@@ -126,7 +138,7 @@ function loadVerhalen(){
         document.getElementById("tekst").textContent = verhaal.tekst;
         document.getElementById("nummer").textContent = "Verhaal " + verhaal.id;
         document.getElementById("afbeelding").src = "img/" + verhaal.afbeelding;
-        
+
         let audio = null;
 
         function voorlezen(){
