@@ -20,14 +20,31 @@ document.addEventListener("DOMContentLoaded", async (event) => {
 
 function getLocation() {
     return new Promise((resolve, reject) => {
+        const timeout = 5000;
+        
+        const timer = setTimeout(() => {
+            reject(new Error("Locatie ophalen duurde te lang."));
+        }, timeout);
+
+        const geoOptions = {
+            enableHighAccuracy: true,
+            timeout: timeout,
+            maximumAge: 0
+        };
+
+
         // Vraag locatie op van de gebruiker
         navigator.geolocation.getCurrentPosition((pos) => {
+            clearTimeout(timer);
             userLat = pos.coords.latitude;
             userLng = pos.coords.longitude;
             resolve();
         }, (err) => {
+            clearTimeout(timer);
             reject(err);
-        });
+        },           
+        geoOptions
+        );
     })
 }
 
