@@ -128,6 +128,13 @@ function loadVerhalen(){
             afbeelding: "verhaal7.png",
             locatie: { lat: 53.0319457 , lng: 7.0430776 }
         },
+        {
+            id: 8,
+            titel: "Test story",
+            tekst: "jaja, t werkt",
+            afbeelding: "verhaal7.png",
+            locatie: { lat: 53.08557714391873 , lng: 6.978023559773206 }
+        },
     ];
 
     const verhaal = verhalen.find(v => v.id === parseInt(id))
@@ -210,11 +217,11 @@ function loadVerhalen(){
 
             if (distance > threshold){
                 // Disable de knop wanneer gebruiker uit de radius is
-                // link.classList.add('disabled');
-                // link.style.pointerEvents = 'none';
+                link.classList.add('disabled');
+                link.style.pointerEvents = 'none';
                 link.textContent = "Bekijk verhaal";
                 const message = document.createElement('p');
-                message.textContent = "Je bent buiten het bereik van dit verhaal! (Knop wel tijdelijk bruikbaar gemaakt)";
+                message.textContent = "Je bent buiten het bereik van dit verhaal!";
                 message.classList.add('alert', 'alert-danger', 'mt-4');
                 link.parentElement.appendChild(message);
             }
