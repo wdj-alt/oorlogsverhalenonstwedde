@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
             catch (error) {
                 loadVerhalen();
             }
-        }, 1000);
+        }, 500);
     } finally {
         if (loadingElement){
             loadingElement.style.display = "none"
