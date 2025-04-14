@@ -51,9 +51,7 @@ function getLocation() {
         navigator.geolocation.getCurrentPosition((pos) => {
             clearTimeout(timer);
             userLat = pos.coords.latitude;
-            console.log("userLat",userLat);
             userLng = pos.coords.longitude;
-            console.log("userLng", userLng);
             
             resolve();
         }, (err) => {
@@ -80,7 +78,7 @@ function loadVerhalen(){
             titel: "Oorlog - Jan Hidding",
             tekst: "Geen partij kiezen, afzijdig houden, dat was de politieke strategie die de Nederlandse regering koos in aanloop naar de tweede wereldoorlog. De neutraliteit had ons land immers de gruwelijkheden en destructie van de Eerste Wereldoorlog bespaard. Na de Duitse inval in Polen in 1939 werden er door de Nederlandse regering toch voorbereidingen getroffen voor een eventuele oorlogssituatie. In 1939  werden daarom 250.000 mannen gemobiliseerd om het Nederlandse leger te versterken. Deze mannen zijn veelal gewone Nederlandse burgers die werkloos zijn geworden door de economische crisis uit de jaren 1931 - 1939. Dit geldt ook voor Onstwedder Jan Hidding. Jan is een jonge man van 22, geboren in Onstwedde. Ook hij moet in 1939, vlak voor de Tweede Wereldoorlog, in militaire dienst. Jan wordt vlak bij Wassenaar gestationeerd, bij het vliegveld Valkenburg, dicht bij de kust. Hij is onderdeel van eenheid 1R.I . Zijn taak is om samen met zijn kameraden de duinen rondom het vliegveld Valkenburg bij Wassenaar te verdedigen in het geval van oorlog.  Op 10 mei 1940 gebeurt dan toch wat de Nederlanders al maanden voor vrezen, het is oorlog. Het Duitse leger valt Nederland op verschillende plekken binnen en het Nederlandse leger, enigszins verrast, doet haar best het land te verdedigen. In de ochtend van 10 mei vallen de Duitsers vliegveld Valkenburg aan met bommen en parachutisten. Jan en zijn medesoldaten proberen de Duitsers tegen te houden, maar de strijd om Jan en zijn kameraden heen is heel erg chaotisch. Er is veel verwarring en sommige soldaten weten niet goed wat ze moesten doen. De Duitsers weten het vliegveld te veroveren, maar als de eerste Duitse vliegtuigen proberen te landen verzakken deze in de zachte ondergrond. Het vliegveld blijkt onbruikbaar en wordt later die dag al terug veroverd door de Nederlandse soldaten. Om het vliegveld heen wordt in de nacht van 11 mei veel gevochten. Jan en zijn medesoldaten proberen in de duinen, vlak bij Wassenaar, de Duitsers tegen te houden zodat ze niet naar het regeringscentrum in Den Haag door kunnen stoten. Met man en macht verzetten de Nederlandse soldaten zich tegen de Duitse agressor en weten ze de opmars te vertragen. Tijdens deze gevechten verloor Jan Hidding uit Onstwedde zijn leven. Hoe, wat of wanneer zal voor altijd onbekend blijven. Wat we wel altijd zullen blijven herinneren is hoe Jan Hidding uit Onstwedde ons land met zijn leven heeft verdedigd. Zijn vrienden en dorpsgenoten uit Onstwedde hebben later een gedenksteen voor hem geplaatst als eerbetoon. Deze is terug te vinden op de openbare begraafplaats. Ook wordt Jan, met zijn gevallen medesoldaten, herdacht bij het monument in Wassenaar Het Nederlandse leger verzette zich hevig tegen de Duitse invasie en de bij de Slag om Den Haag werd de Duitse opmars succesvol afgestopt. Na een vier dagen durende strijd werd Rotterdam op 14 mei verwoest door bombardementen van de Duitse luchtmacht. De dreiging ook andere grote steden te vernietigen dwong het Nederlandse leger op 15 mei tot capitulatie. Net als in de rest van Nederland brak in Onstwedde een onzekere tijd aan van bezetting aan. Hoewel de start van de Tweede Wereldoorlog in Onstwedde relatief rustig verliep, zouden de gevolgen van een nieuw Duits regime ook in Onstwedde voelbaar zijn. ",
             afbeelding: "verhaal1.png",
-            locatie: { lat: 53.086139817746876 , lng: 6.976357432866958 }
+            locatie: { lat: 53.042147 , lng: 7.043593 }
         },
         // Dorpstraat 66
         {
@@ -177,7 +175,6 @@ function loadVerhalen(){
             const route = `https://www.google.com/maps/dir/?api=1${isUserLocationSet ? `&origin=${userLat},${userLng}` : ''}&destination=${verhaal.locatie.lat},${verhaal.locatie.lng}`
             container.innerHTML += 
             `
-            <p>LAT ${userLat} LNG ${userLng}</p>
             <div class="card shadow m-3">
                 <div class="text-center">    
 
