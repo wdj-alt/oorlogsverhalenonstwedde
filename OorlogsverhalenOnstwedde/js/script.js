@@ -65,6 +65,13 @@ function getLocation() {
     })
 }
 
+function updateLocationDisplay(lat, lng) {
+    const display = document.getElementById("locationDisplay");
+    if (display) {
+        display.textContent = `Je locatie: ${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+    }
+}
+
 
 
 function loadVerhalen(){

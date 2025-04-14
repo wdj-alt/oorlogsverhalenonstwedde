@@ -45,16 +45,10 @@
 ">
     Verhalen vernieuwd
 </div>
+<div id="locationDisplay" class="text-muted text-center mt-3">
+    Locatie wordt geladen...
+</div>
 
-
-        <div class="container-lg">
-            <div class="container">
-                <div id="verhalenContainer"></div>
-            </div>
-        </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-        <script src="js/script.js"></script>
         <div class="container-lg">
             <div class="container">
                 <div id="verhalenContainer"></div>
@@ -66,9 +60,23 @@
         
         <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Refresh de verhalenContainer elke 6 seconden
+            // Refresh de verhalenContainer elke 6 seconden met de nieuwe locatie
             setInterval(() => {
-                fetchVerhalen();
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        userLat = position.coords.latitude;
+                        userLng = position.coords.longitude;
+                        fetchVerhalen();
+                        const locationDisplay = document.getElementById("locationDisplay");
+                        if (locationDisplay) {
+                            locationDisplay.innerText = `DEBUG: Huidige locatie: ${userLat}, ${userLng}`;
+                        }                        
+                        console.log("refreshed with new location!", userLat, userLng);
+                    },
+                    error => {
+                        console.warn("Location update failed:", error);
+                    }
+                );
                 console.log("refreshed!")
             }, 6000);
         
