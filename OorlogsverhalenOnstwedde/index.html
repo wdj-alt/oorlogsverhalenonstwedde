@@ -61,26 +61,58 @@
         <script>
         document.addEventListener("DOMContentLoaded", () => {
             // Refresh de verhalenContainer elke 6 seconden met de nieuwe locatie
-            function refreshLoop(){
+            // function refreshLoop(){
+            //     navigator.geolocation.getCurrentPosition(
+            //         position => {
+            //             userLat = position.coords.latitude;
+            //             userLng = position.coords.longitude;
+            //             fetchVerhalen();
+            //             const locationDisplay = document.getElementById("locationDisplay");
+            //             if (locationDisplay) {
+            //                 locationDisplay.innerText = `DEBUG: Huidige locatie: ${userLat}, ${userLng}`;
+            //             }                        
+            //             console.log("refreshed with new location!", userLat, userLng);
+            //         },
+            //         error => {
+            //             console.warn("Location update failed:", error);
+            //         }
+            //     );
+
+            //     setTimeout(refreshLoop, 3000)
+            // }
+
+            // refreshLoop();
+
+            // Refresh de verhalenContainer elke 6 seconden met de nieuwe locatie
+            function refreshLoop() {
                 navigator.geolocation.getCurrentPosition(
                     position => {
                         userLat = position.coords.latitude;
                         userLng = position.coords.longitude;
-                        fetchVerhalen();
+                        
                         const locationDisplay = document.getElementById("locationDisplay");
                         if (locationDisplay) {
                             locationDisplay.innerText = `DEBUG: Huidige locatie: ${userLat}, ${userLng}`;
-                        }                        
-                        console.log("refreshed with new location!", userLat, userLng);
+                        }
+
+                        console.log("Location updated:", userLat, userLng);
+
+                        fetchVerhalen();
                     },
                     error => {
                         console.warn("Location update failed:", error);
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 5000,
+                        maximumAge: 0
                     }
                 );
 
-                setTimeout(refreshLoop, 3000)
+                setTimeout(refreshLoop, 3000);
             }
 
+            // Start the loop when the page loads
             refreshLoop();
         
             // Fetch de data nu vanuit een json file
