@@ -151,6 +151,13 @@ function loadVerhalen(){
             afbeelding: "verhaal7.png",
             locatie: { lat: 53.08535107387255 , lng: 6.978246351710982 }
         },
+        {
+            id: 10,
+            titel: "Zernike plein test",
+            tekst: "jaja, t werkt",
+            afbeelding: "verhaal7.png",
+            locatie: { lat: 53.241121669659734 , lng: 6.533588393662367 }
+        },
     ];
 
     const verhaal = verhalen.find(v => v.id === parseInt(id))
