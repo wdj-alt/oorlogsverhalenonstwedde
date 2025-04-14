@@ -171,8 +171,10 @@ function loadVerhalen(){
 
         verhalen.forEach(verhaal => {
             // Check of de locatie is gezet, wanneer niet zetten we &origin niet in de link.
-            const isUserLocationSet = userLat !== undefined && userLng !== undefined && !isNaN(userLat) && !isNaN(userLng);
+            const isUserLocationSet = userLat !== undefined && userLng !== undefined;
+
             const route = `https://www.google.com/maps/dir/?api=1${isUserLocationSet ? `&origin=${userLat},${userLng}` : ''}&destination=${verhaal.locatie.lat},${verhaal.locatie.lng}`
+
             container.innerHTML += 
             `
             <div class="card shadow m-3">
@@ -190,7 +192,7 @@ function loadVerhalen(){
                         </div>    
                         <a href="oorlogsverhaal.html?verhaal=${verhaal.id}" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center verhaal-link">Bekijk verhaal</a>
 
-                        <a href="${route}" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center route-link">Bekijk route</a>
+                        <a href="${route}" target="_blank" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center route-link">Bekijk route</a>
                     </div>
                 </div>
             </div>
@@ -198,34 +200,25 @@ function loadVerhalen(){
         });
 
         
-    const threshold = 0.1;
+        const threshold = 0.1;
 
-    // Verhaal link
-    document.querySelectorAll('.verhaal-link').forEach(link => {
-        const verhaalLat = parseFloat(link.getAttribute('data-lat'));
-        const verhaalLng = parseFloat(link.getAttribute('data-lng'));
-        const distance = getDistanceFromLatLonInKm(userLat, userLng, verhaalLat, verhaalLng);
+        // Verhaal link
+        document.querySelectorAll('.verhaal-link').forEach(link => {
+            const verhaalLat = parseFloat(link.getAttribute('data-lat'));
+            const verhaalLng = parseFloat(link.getAttribute('data-lng'));
+            const distance = getDistanceFromLatLonInKm(userLat, userLng, verhaalLat, verhaalLng);
 
-        if (distance > threshold){
-            // Disable de knop wanneer gebruiker uit de radius is
-            // link.classList.add('disabled');
-            // link.style.pointerEvents = 'none';
-            link.textContent = "Bekijk verhaal";
-            const message = document.createElement('p');
-            message.textContent = "Je bent buiten het bereik van dit verhaal! (Knop wel tijdelijk bruikbaar gemaakt)";
-            message.classList.add('alert', 'alert-danger', 'mt-4');
-            link.parentElement.appendChild(message);
-        }
-    });
-
-    document.querySelectorAll('.route-link').forEach(link => {
-        const verhaalLat = parseFloat(link.getAttribute('data-lat'));
-        const verhaalLng = parseFloat(link.getAttribute('data-lng'));
-        const route = `https://www.google.com/maps/dir/?api=1&origin=${userLat},${userLng}&destination=${verhaalLat},${verhaalLng}`
-
-        link.setAttribute('href', route);
-        link.setAttribute('target', '_blank');   
-    })
+            if (distance > threshold){
+                // Disable de knop wanneer gebruiker uit de radius is
+                // link.classList.add('disabled');
+                // link.style.pointerEvents = 'none';
+                link.textContent = "Bekijk verhaal";
+                const message = document.createElement('p');
+                message.textContent = "Je bent buiten het bereik van dit verhaal! (Knop wel tijdelijk bruikbaar gemaakt)";
+                message.classList.add('alert', 'alert-danger', 'mt-4');
+                link.parentElement.appendChild(message);
+            }
+        });
     }
 }
 
