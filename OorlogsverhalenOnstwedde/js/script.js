@@ -201,7 +201,7 @@ function loadVerhalen(){
                          
                         <a href="oorlogsverhaal.html?verhaal=${verhaal.id}" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center verhaal-link">Bekijk verhaal</a>
 
-                        <a href="${route}" target="_blank" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center route-link"> <i class="bi bi-geo-alt"></i>Bekijk route</a>
+                        <a href="${route}" target="_blank" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center route-link"> <i class="bi bi-geo-alt"></i> Route</a>
                     </div>
                 </div>
             </div>
