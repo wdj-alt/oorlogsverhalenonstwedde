@@ -33,34 +33,44 @@ document.addEventListener("DOMContentLoaded", () => {
     // start de loop
     refreshLoop();
 
+    // Functie om alleen de locatie te verversen.
+    function refreshLocation() {
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                userLat = position.coords.latitude;
+                userLng = position.coords.longitude;
+
+                fetchVerhalen();
+
+                const locationDisplay = document.getElementById("locationDisplayVisisble");
+                if (locationDisplay) {
+                    locationDisplay.innerText = `DEBUG: Huidige locatie (na visible): ${userLat}, ${userLng}`;
+                }
+
+                console.log("Gerefreshed a sehbi!", userLat, userLng);
+
+            },
+            error => {
+                console.warn("Location niet verkegen na nieuw scherm:", error);
+            },
+            {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0
+            }
+        );
+    }
+
+    // Ververs de locatie wanneer naar tab geswitched wordt (en dus weer in beeld komt)
     document.addEventListener("visibilitychange", () => {
         if (document.visibilityState === "visible") {
-            
-            navigator.geolocation.getCurrentPosition(
-                position => {
-                    userLat = position.coords.latitude;
-                    userLng = position.coords.longitude;
-    
-                    fetchVerhalen();
-    
-                    const locationDisplay = document.getElementById("locationDisplayVisisble");
-                    if (locationDisplay) {
-                        locationDisplay.innerText = `DEBUG: Huidige locatie (na visible): ${userLat}, ${userLng}`;
-                    }
-    
-                    console.log("Gerefreshed toen tab in beeld kwam met", userLat, userLng);
-
-                },
-                error => {
-                    console.warn("Location niet verkegen na nieuw scherm:", error);
-                },
-                {
-                    enableHighAccuracy: true,
-                    timeout: 5000,
-                    maximumAge: 0
-                }
-            );
+            refreshLocation();
         }
+    });
+
+    // Nog meer checks voor tab switch of unlock en lock telefoon
+    window.addEventListener("pageshow", () => {
+            refreshLocation();
     });
 
     // Fetch de data nu vanuit een json file
