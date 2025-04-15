@@ -30,8 +30,38 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(refreshLoop, 6000);
     }
 
-    // Start the loop when the page loads
+    // start de loop
     refreshLoop();
+
+    document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") {
+            
+            navigator.geolocation.getCurrentPosition(
+                position => {
+                    userLat = position.coords.latitude;
+                    userLng = position.coords.longitude;
+    
+                    fetchVerhalen();
+    
+                    const locationDisplay = document.getElementById("locationDisplayVisisble");
+                    if (locationDisplay) {
+                        locationDisplay.innerText = `DEBUG: Huidige locatie (na visible): ${userLat}, ${userLng}`;
+                    }
+    
+                    console.log("Gerefreshed toen tab in beeld kwam met", userLat, userLng);
+
+                },
+                error => {
+                    console.warn("Location niet verkegen na nieuw scherm:", error);
+                },
+                {
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                    maximumAge: 0
+                }
+            );
+        }
+    });
 
     // Fetch de data nu vanuit een json file
     function fetchVerhalen() {
