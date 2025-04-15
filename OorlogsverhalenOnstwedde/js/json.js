@@ -99,7 +99,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const route = `https://www.google.com/maps/dir/?api=1${isUserLocationSet ? `&origin=${userLat},${userLng}` : ''}&destination=${verhaal.locatie.lat},${verhaal.locatie.lng}`;
 
             const distance = getDistanceFromLatLonInKm(userLat, userLng, verhaal.locatie.lat, verhaal.locatie.lng);
-            const threshold = 0.1;
+            // Check op 50 meters
+            const threshold = 0.05;
 
             const storyHtml = `
                 <div class="card shadow m-3">

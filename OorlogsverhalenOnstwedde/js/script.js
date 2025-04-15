@@ -136,28 +136,7 @@ function loadVerhalen(){
             tekst: "De winter van 1944-1945 staat bekend als de Hongerwinter. In het westen van Nederland leden honderdduizenden mensen honger door de strenge winter, de tekorten aan voedsel en brandstof, en de afsluiting van bevoorradingsroutes door de Duitsers. Steden als Rotterdam en Amsterdam waren het zwaarst getroffen. Brood, melk en aardappelen waren nauwelijks te krijgen, en veel mensen moesten hun laatste bezittingen ruilen voor voedsel. Om te voorkomen dat kinderen zouden sterven door ondervoeding, werden duizenden stadskinderen naar het platteland gestuurd, waar boeren en dorpsbewoners hen opvingen en van voedsel voorzagen.Zo kwam ook Jaap Bestebeurtje, een 7-jarige jongen uit Rotterdam, in Onstwedde terecht. Zijn eerste reis naar het noorden begon in augustus 1942, nog voor de Hongerwinter. Hij stapte op in Rotterdam, een stad die al zwaar gebombardeerd was, en begon aan een lange reis naar het noorden. De trein reed via Zwolle, waar de kinderen overstapten op een boemeltrein die hen door de Drentse heide bracht. Zijn eindbestemming was Onstwedde, een dorp waar hij zou verblijven bij Wiepko en Albertje Boels-Kok aan de Kerklaan 18. Dit echtpaar had geen kinderen, maar ze ontvingen Jaap met open armen. Het huis rook vreemd voor Jaap – niet naar de rook en uitlaatgassen van de stad, maar naar hooi, aardappelloof en versgebakken brood. Ook het eten was anders: roggebrood in plaats van witbrood, melk direct van de koe en aardappelen met spek in plaats van de magere soep die hij thuis gewend was. In het begin was het wennen. Hij begreep het Groningse dialect nauwelijks en miste zijn familie in Rotterdam. Maar langzaam begon hij zich aan te passen. Na aangesterkt te zijn keerde Jaap datzelfde jaar terug naar Rotterdam. De situatie in Rotterdam werd in 1944 alleen maar erger. Voedsel was er nauwelijks, de mensen vielen kilo’s af en kinderen stierven aan ondervoeding. In augustus 1944 mocht Jaap opnieuw naar Onstwedde, deze keer samen met zijn zus Martha en broer Bernard. Dit keer werden ze niet alleen opgevangen bij de familie Boels, maar ook bij boer Huls in de Höfte en boer Halmigh. Op de boerderij leerde Jaap over het harde leven op het platteland. Hij hielp met het binnenhalen van hooi, het rapen van aardappelen en het voeren van de koeien. Voor een stadskind was dit een compleet andere wereld. Maar het allerbelangrijkste: hij kreeg weer voldoende te eten. Tijdens deze winter werden voedselpakketten en melk vanaf het platteland naar het westen gestuurd, maar vaak kwam het niet aan door plunderingen van de Duitsers. Daarom werden kinderen zoals Jaap naar het noorden gehaald – een directe manier om levens te redden. De Hongerwinter was een van de meest ingrijpende periodes in de Nederlandse geschiedenis. Terwijl in het westen van Nederland duizenden mensen stierven door honger, hielp de bevolking op het platteland zoveel als ze konden. Het verhaal van Jaap en de gastvrijheid van Onstwedde laat zien dat, ondanks oorlog en tekorten, menselijkheid en solidariteit bleven bestaan. Boeren en dorpsbewoners deelden hun voedsel met kinderen die anders geen overlevingskans hadden gehad.",
             afbeelding: "verhaal7.png",
             locatie: { lat: 53.0319457 , lng: 7.0430776 }
-        },
-        {
-            id: 8,
-            titel: "muziek huis sammy",
-            tekst: "jaja, t werkt",
-            afbeelding: "verhaal7.png",
-            locatie: { lat: 53.08585971940591 , lng: 6.978511096985318 }
-        },
-        {
-            id: 9,
-            titel: "Test story",
-            tekst: "jaja, t werkt",
-            afbeelding: "verhaal7.png",
-            locatie: { lat: 53.08535107387255 , lng: 6.978246351710982 }
-        },
-        {
-            id: 10,
-            titel: "Zernike plein test",
-            tekst: "jaja, t werkt",
-            afbeelding: "verhaal7.png",
-            locatie: { lat: 53.241121669659734 , lng: 6.533588393662367 }
-        },
+        }
     ];
 
     const verhaal = verhalen.find(v => v.id === parseInt(id))
@@ -229,8 +208,8 @@ function loadVerhalen(){
             `
         });
 
-        
-        const threshold = 0.1;
+        // Check op 50 meters
+        const threshold = 0.05;
 
         // Verhaal link
         document.querySelectorAll('.verhaal-link').forEach(link => {
