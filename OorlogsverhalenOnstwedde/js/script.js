@@ -35,8 +35,8 @@ document.addEventListener("DOMContentLoaded", async (event) => {
 
 function getLocation() {
     return new Promise((resolve, reject) => {
-        const timeout = 6000;
-        // Zet 6 sec timer om maximaal de user zijn locatie op te halen, anders reject de promise.
+        const timeout = 5000;
+        // Zet 5 sec timer om maximaal de user zijn locatie op te halen, anders reject de promise.
         const timer = setTimeout(() => {
             reject(new Error("Locatie ophalen duurde te lang."));
         }, timeout);
@@ -209,20 +209,20 @@ function loadVerhalen(){
             `
             <div class="card shadow m-3">
                 <div class="text-center">    
+                    <div class="card-body" id="myInput">
+                        <h5 class="card-title">Verhaal ${verhaal.id}</h5>
 
-                <div class="card-body" id="myInput">
-                    <h5 class="card-title">Verhaal ${verhaal.id}</h5>
-
-                    <h6 class="card-subtitle mb-2 text-muted">        
-                        <p>${verhaal.titel}</p>
-                    </h6>
+                        <h6 class="card-subtitle mb-2 text-muted">        
+                          <p>${verhaal.titel}</p>
+                        </h6>
                     
                         <div class="post-image-container mb-4">
                             <img src="img/${verhaal.afbeelding}" alt="Verhaal afbeelding" class="img-fluid rounded mx-auto d-block shadow-2-strong" style="width:300px">
-                        </div>    
+                        </div>   
+                         
                         <a href="oorlogsverhaal.html?verhaal=${verhaal.id}" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center verhaal-link">Bekijk verhaal</a>
 
-                        <a href="${route}" target="_blank" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center route-link">Bekijk route</a>
+                        <a href="${route}" target="_blank" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center route-link"> <i class="bi bi-geo-alt"></i>Bekijk route</a>
                     </div>
                 </div>
             </div>

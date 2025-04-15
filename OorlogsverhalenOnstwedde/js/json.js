@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 const locationDisplay = document.getElementById("locationDisplay");
                 if (locationDisplay) {
-                    locationDisplay.innerText = `DEBUG: Huidige locatie: ${userLat}, ${userLng}`;
+                    locationDisplay.innerText = `DEBUG: Huidige locatie (periodieke refresh): ${userLat}, ${userLng}`;
                 }
 
                 console.log("Location updated:", userLat, userLng);
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         );
 
-        setTimeout(refreshLoop, 6000);
+        setTimeout(refreshLoop, 5000);
     }
 
     // start de loop
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     locationDisplay.innerText = `DEBUG: Huidige locatie (na visible): ${userLat}, ${userLng}`;
                 }
 
-                console.log("Gerefreshed a sehbi!", userLat, userLng);
+                console.log("Gerefreshed toen tab in beeld kwam met", userLat, userLng);
 
             },
             error => {
@@ -78,11 +78,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const verhalenContainer = document.getElementById("verhalenContainer");
 
         if (verhalenContainer) {
-            fetch(`stories.json?nocache=${new Date().getTime()}`)
+            fetch(`verhalen.json?nocache=${new Date().getTime()}`)
                 .then(response => response.json())
                 .then(data => {
                     renderVerhalen(data);
-                    showRefreshNotice();
                 })
                 .catch(error => {
                     console.error("Error fetching verhalen:", error);
@@ -90,18 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    function showRefreshNotice() {
-        const notice = document.getElementById("refreshNotice");
-        if (!notice) return;
-
-        notice.style.opacity = 1;
-
-        setTimeout(() => {
-            notice.style.opacity = 0;
-        }, 2000);
-    }
-
-    // Help functie om de logica voor checken distance ook te applyen op de json data vanuit stories.json
+    // Help functie om de logica voor checken distance ook te applyen op de json data vanuit verhalen.json
     function renderVerhalen(verhalen) {
         const verhalenContainer = document.getElementById("verhalenContainer");
         verhalenContainer.innerHTML = '';
@@ -129,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                             <a href="oorlogsverhaal.html?verhaal=${verhaal.id}" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center verhaal-link">Bekijk verhaal</a>
 
-                            <a href="${route}" target="_blank" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center route-link">Bekijk route</a>
+                            <a href="${route}" target="_blank" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center route-link"> <i class="bi bi-geo-alt"></i> Bekijk route</a>
                         </div>
                     </div>
                 </div>
@@ -150,12 +138,12 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <img src="img/${verhaal.afbeelding}" alt="Verhaal afbeelding" class="img-fluid rounded mx-auto d-block shadow-2-strong" style="width:300px">
                                 </div>    
 
-                                <a href="oorlogsverhaal.html?verhaal=${verhaal.id}" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center verhaal-link disabled"   style="pointer-events: none;" >Bekijk verhaal</a>
+                                <a href="oorlogsverhaal.html?verhaal=${verhaal.id}" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center verhaal-link disabled" style="pointer-events: none;" > <i class="bi bi-book"></i> Bekijk verhaal</a>
 
-                                <a href="${route}" target="_blank" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center route-link">Bekijk route</a>
+                                <a href="${route}" target="_blank" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center route-link"> <i class="bi bi-geo-alt-fill"></i> Route</a>
 
                                 <div class="alert alert-danger mt-4" role="alert">
-                                    Je bent buiten het bereik van dit verhaal!
+                                    Je bent buiten het bereik van dit verhaal! Navigeer naar dit verhaal via de route!
                                 </div>
                             </div>
                         </div>
