@@ -267,8 +267,13 @@ document.addEventListener("DOMContentLoaded", () => {
     
             if (permissionStatus.state === 'granted') {
                     const loadingDiv = document.getElementById("loading");
+                    const verhalenContainer = document.getElementById("verhalenContainer");
                     if (loadingDiv) {
                         loadingDiv.style.display = "block";
+                    }
+
+                    if (verhalenContainer) {
+                        verhalenContainer.style.display = "none";
                     }
 
                     // Refresh location immediately
