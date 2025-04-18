@@ -291,6 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     refreshLocation();
             }
+        }
             
     });
 
