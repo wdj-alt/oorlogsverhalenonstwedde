@@ -267,6 +267,20 @@ document.addEventListener("DOMContentLoaded", () => {
     
             if (permissionStatus.state === 'granted') {
                 refreshLocation();
+                    const loadingDiv = document.getElementById("loading");
+                    if (loadingDiv) {
+                        loadingDiv.style.display = "block";
+                    }
+
+                    // Refresh location immediately
+                    refreshLocation();
+
+                    // Optional: hide the loader again after a short delay
+                   setTimeout(() => {
+                       if (loadingDiv) {
+                           loadingDiv.style.display = "none";
+                       }
+                   }, 3000); // 3 seconds placeholder
             }
         };
     });
