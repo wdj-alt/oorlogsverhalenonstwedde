@@ -1,0 +1,13 @@
+.userMarker {
+    background: none;
+    font-size: 30px;
+}
+
+.legendUserMarker {
+    background: radial-gradient(circle, rgba(0, 101, 209, 1) 0%, rgba(0, 101, 209, 0.6) 70%, rgba(0, 123, 255, 0) 100%); 
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 101, 209, 0.5);
+}

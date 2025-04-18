@@ -22,6 +22,17 @@ let audio = null;
 
 document.addEventListener("DOMContentLoaded", () => {
     getVerhaal()
+
+    // Wanneer gescrolled moet worden naar een specifiek verhaal, wacht totdat alle verhalen zijn geladen en scroll daarna.
+    const hash = window.location.hash;
+    if (hash) {
+        setTimeout(function() {
+            const targetElement = document.querySelector(hash);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: "smooth" });
+            }
+        }, 100);
+    }
     
     // Refresh de verhalenContainer elke 6 seconden met de nieuwe locatie
     function refreshLoop() {
@@ -104,10 +115,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             const storyHtml = `
-                <div class="card shadow m-3">
+                <div class="card shadow m-3" id="verhaal${verhaal.id}">
                     <div class="text-center">    
                         <div class="card-body" id="myInput">
-                            <i class="bi bi-arrow-left"></i>
                             <h5 class="card-title">Verhaal ${verhaal.id}</h5>
 
                             <h6 class="card-subtitle mb-2 text-muted">        
@@ -128,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (distance > threshold) {
                 const disabledStoryHtml = `
-                    <div class="card shadow m-3">
+                    <div class="card shadow m-3" id="verhaal${verhaal.id}">
                         <div class="text-center">    
                             <div class="card-body" id="myInput">
                                 <h5 class="card-title">Verhaal ${verhaal.id}</h5>
@@ -241,15 +251,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         volumeDiv.appendChild(stopButton);
         }
-        
     }
-
-
 });
-
-
-
-
 
 // LOCATIE CODE
 

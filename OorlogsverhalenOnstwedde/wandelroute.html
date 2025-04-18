@@ -63,8 +63,43 @@
                       </div>
                     </div>
                 </div>
+
+                <div class="card shadow m-3">
+                  <h4 class="text-center mt-2 mb-2">Kaart Legenda</h4>
+                  <div class="container d-flex flex-column align-items-center">
+                    <div class="d-flex justify-content-start align-items-center mb-2">
+                      <div class="me-5" style="width:20px;">
+                        <img src="img/icons/marker-icon.png" width="20" height="31" alt="Verhaal marker">
+                      </div>
+                      <div>
+                        <p class="mb-0 text-center">Verhaal</p>
+                      </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-start align-items-center mb-2">
+                      <div class="me-3" style="width:30px;">
+                        <span style="font-size: 20px;">🏁</span>
+                      </div>
+                      <div>
+                        <p class="mb-0">Einde route</p>
+                      </div>
+                    </div>
+                
+                    <div id="legendUserLocation" class="d-flex justify-content-start align-items-center mb-2" style="display:none !important;">
+                      <div class="me-3" style="width:30px;">
+                        <div class="legendUserMarker"></div>
+                      </div>
+                      <div>
+                        <p class="mb-0">Uw locatie</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <small class="text-muted mt-5 m-3 text-center" style="font-size: 0.5rem;">Tip: u kunt in de kaart op een <img src="img/icons/marker-icon.png" width="10" height="16" alt="Verhaal marker"> klikken om naar een verhaal te bekijken.</small>
+                </div>
             </div>
         </div>
+        
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         <script src="js/wandelroute.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
