@@ -77,4 +77,7 @@ function refreshUserMarker() {
 
 setInterval(refreshUserMarker, 5000);
 
-refreshUserMarker();
+document.addEventListener("DOMContentLoaded", () => {
+
+    refreshUserMarker();
+});

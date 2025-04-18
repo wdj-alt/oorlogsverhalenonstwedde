@@ -22,19 +22,8 @@ let audio = null;
 
 document.addEventListener("DOMContentLoaded", () => {
     getVerhaal()
-
-    // Wanneer gescrolled moet worden naar een specifiek verhaal, wacht totdat alle verhalen zijn geladen en scroll daarna.
-    const hash = window.location.hash;
-    if (hash) {
-        setTimeout(function() {
-            const targetElement = document.querySelector(hash);
-            if (targetElement) {
-                targetElement.scrollIntoView({ behavior: "smooth" });
-            }
-        }, 100);
-    }
     
-    // Refresh de verhalenContainer elke 6 seconden met de nieuwe locatie
+    // Refresh de verhalenContainer elke 5 seconden met de nieuwe locatie
     function refreshLoop() {
         refreshLocation();
         setTimeout(refreshLoop, 5000);
@@ -125,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             </h6>
                             
                             <div class="post-image-container mb-4">
-                                <img src="img/${verhaal.afbeelding}" alt="Verhaal afbeelding" class="img-fluid rounded mx-auto d-block shadow-2-strong" style="width:300px">
+                                <img src="img/${verhaal.afbeelding}" alt="Verhaal afbeelding" class="img-fluid rounded mx-auto d-block shadow-2-strong">
                             </div>    
 
                             <a href="oorlogsverhaal.html?verhaal=${verhaal.id}" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center verhaal-link">Bekijk verhaal</a>
@@ -148,14 +137,14 @@ document.addEventListener("DOMContentLoaded", () => {
                                 </h6>
                                 
                                 <div class="post-image-container mb-4">
-                                    <img src="img/${verhaal.afbeelding}" alt="Verhaal afbeelding" class="img-fluid rounded mx-auto d-block shadow-2-strong" style="width:300px">
+                                    <img src="img/${verhaal.afbeelding}" alt="Verhaal afbeelding" class="img-fluid rounded mx-auto d-block shadow-2-strong" style="width:250px;">
                                 </div>    
 
                                 <a href="oorlogsverhaal.html?verhaal=${verhaal.id}" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center verhaal-link disabled" style="pointer-events: none;" > <i class="bi bi-book"></i> Bekijk verhaal</a>
 
                                 <a href="${route}" target="_blank" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center route-link"> <i class="bi bi-geo-alt-fill"></i> Route</a>
 
-                                <div class="alert alert-danger mt-4" role="alert">
+                                <div class="alert alert-danger mt-3" role="alert" style="font-size: 0.7rem; font-weight:bold;">
                                     Je bent buiten het bereik van dit verhaal! Navigeer naar dit verhaal via de route!
                                 </div>
                             </div>
@@ -167,6 +156,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 verhalenContainer.innerHTML += storyHtml;
             }
         });
+
+        // Wanneer gescrolled moet worden naar een specifiek verhaal, wacht totdat alle verhalen zijn geladen en scroll daarna.
+        const hash = window.location.hash;
+        if (hash) {
+            setTimeout(function() {
+                const targetElement = document.querySelector(hash);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: "smooth" });
+                    history.replaceState(null, null, window.location.pathname + window.location.search);
+                }
+            }, 100);
+        }
     }
 
     function getVerhaalParam(id) {
