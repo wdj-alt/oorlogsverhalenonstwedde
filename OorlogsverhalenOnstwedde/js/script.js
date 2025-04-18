@@ -266,7 +266,6 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log('Locatie rechten veranderd naar:', permissionStatus.state);
     
             if (permissionStatus.state === 'granted') {
-                refreshLocation();
                     const loadingDiv = document.getElementById("loading");
                     if (loadingDiv) {
                         loadingDiv.style.display = "block";
