@@ -79,11 +79,17 @@ document.addEventListener("DOMContentLoaded", () => {
     function fetchVerhalen() {
         const verhalenContainer = document.getElementById("verhalenContainer");
 
-        if (verhalenContainer) {
+        if (verhalenContainer && loading) {
+            // Verberg verhalen en toon loading
+            loading.style.display = "block";
+            verhalenContainer.style.display = "none";
             fetch(`verhalen.json?nocache=${new Date().getTime()}`)
                 .then(response => response.json())
                 .then(data => {
                     renderVerhalen(data);
+                        // Verberg loading en toon verhalen
+                        loading.style.display = "none";
+                        verhalenContainer.style.display = "block";
                 })
                 .catch(error => {
                     console.error("Error fetching verhalen:", error);
