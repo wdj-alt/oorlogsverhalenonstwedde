@@ -284,7 +284,10 @@ document.addEventListener("DOMContentLoaded", () => {
                        if (loadingDiv) {
                            loadingDiv.style.display = "none";
                        }
-                   }, 3000); // 3 seconds placeholder
+                       if (verhalenContainer) {
+                        verhalenContainer.style.display = "block";
+                       }
+                   }, 4000); // 3 seconds placeholder
             }
         };
     });
