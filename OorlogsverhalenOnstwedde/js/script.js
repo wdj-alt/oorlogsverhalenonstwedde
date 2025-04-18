@@ -23,10 +23,10 @@ let audio = null;
 document.addEventListener("DOMContentLoaded", () => {
     getVerhaal()
     
-    // Refresh de verhalenContainer elke 5 seconden met de nieuwe locatie
+    // Refresh de verhalenContainer elke 4 seconden met de nieuwe locatie
     function refreshLoop() {
         refreshLocation();
-        setTimeout(refreshLoop, 5000);
+        setTimeout(refreshLoop, 4000);
     }
 
     // start de loop
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             {
                 enableHighAccuracy: true,
-                timeout: 5000,
+                timeout: 4000,
                 maximumAge: 0
             }
         );
