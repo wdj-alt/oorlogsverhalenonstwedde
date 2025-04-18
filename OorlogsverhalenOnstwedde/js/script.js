@@ -258,6 +258,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // Luister naar locatie rechten verandering, zodat we direct de locatie kunnen fetchen wanneer permission = granted
+    navigator.permissions.query({ name: 'geolocation' }).then(function(permissionStatus) {
+        console.log('Locatie rechten zijn:', permissionStatus.state);
+    
+        permissionStatus.onchange = function() {
+            console.log('Locatie rechten veranderd naar:', permissionStatus.state);
+    
+            if (permissionStatus.state === 'granted') {
+                refreshLocation();
+            }
+        };
+    });
+
     // Debug hidden, type ?debug=true in url
     const urlParams = new URLSearchParams(window.location.search);
     const debug = urlParams.get('debug');
