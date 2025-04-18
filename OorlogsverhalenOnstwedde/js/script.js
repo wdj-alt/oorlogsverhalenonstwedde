@@ -258,40 +258,42 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Luister naar locatie rechten verandering, zodat we direct de locatie kunnen fetchen wanneer permission = granted
-    navigator.permissions.query({ name: 'geolocation' }).then(function(permissionStatus) {
+     // Luister naar locatie rechten verandering, zodat we direct de locatie kunnen fetchen wanneer permission = granted
+     navigator.permissions.query({ name: 'geolocation' }).then(function(permissionStatus) {
         console.log('Locatie rechten zijn:', permissionStatus.state);
     
         permissionStatus.onchange = function() {
             console.log('Locatie rechten veranderd naar:', permissionStatus.state);
     
             if (permissionStatus.state === 'granted') {
-    const loadingDiv = document.getElementById("loading");
-    const verhalenContainer = document.getElementById("verhalenContainer");
+            const loadingDiv = document.getElementById("loading");
+            const verhalenContainer = document.getElementById("verhalenContainer");
 
-    if (loadingDiv) {
-        loadingDiv.style.display = "block";
-
-        // Blijf laad icon laten showen ookal haalt de refresh hem periodiek weg
-        const keepVisibleInterval = setInterval(() => {
-            if (loadingDiv.style.display !== "block") {
+            // Laad laad icon zien en haal verhalencontainer weg, zodat de GPS te tijd heeft om te updaten en de verhalencontainer te refreshen.
+            if (loadingDiv) {
                 loadingDiv.style.display = "block";
-            }
-        }, 500);
+                verhalenContainer.style.display = "none";
 
-        // Na 4 sec is navigatie sowieso geladen
-        setTimeout(() => {
-            clearInterval(keepVisibleInterval);
-            loadingDiv.style.display = "none";
-            if (verhalenContainer) {
-                verhalenContainer.style.display = "block";
-            }
-        }, 4000);
-    }
+                // Blijf laad icon laten showen ookal haalt de refresh hem periodiek weg
+                const keepVisibleInterval = setInterval(() => {
+                    if (loadingDiv.style.display !== "block") {
+                        loadingDiv.style.display = "block";
+                    }
+                }, 300);
 
-    refreshLocation();
-            }
+                // Na 4 sec is navigatie sowieso geladen, en laten we de verhalenContainer weer zien!
+                setTimeout(() => {
+                    clearInterval(keepVisibleInterval);
+                    loadingDiv.style.display = "none";
+                    if (verhalenContainer) {
+                        verhalenContainer.style.display = "block";
+                    }
+                }, 3000);
+             }
+
+            refreshLocation();
         }
+    }
             
     });
 
