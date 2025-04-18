@@ -78,13 +78,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // Fetch de data nu vanuit een json file
     function fetchVerhalen() {
         const verhalenContainer = document.getElementById("verhalenContainer");
+        const loadingDiv = document.getElementById("loading");
 
-        if (verhalenContainer) {
+        if (verhalenContainer && loadingDiv) {
             fetch(`verhalen.json?nocache=${new Date().getTime()}`)
                 .then(response => response.json())
                 .then(data => {
                     renderVerhalen(data);
-                    loading.style.display = "none";
+                    if (loading.style.display !== "none") {
+                        loading.style.display = "none";
+                    }
                 })
                 .catch(error => {
                     console.error("Error fetching verhalen:", error);
@@ -252,6 +255,17 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
         volumeDiv.appendChild(stopButton);
+        }
+    }
+
+    // Debug hidden, type ?debug=true in url
+    const urlParams = new URLSearchParams(window.location.search);
+    const debug = urlParams.get('debug');
+
+    if (debug === 'true') {
+        const locationDisplay = document.getElementById('locationDisplay');
+        if (locationDisplay) {
+            locationDisplay.style.display = 'block';
         }
     }
 });
