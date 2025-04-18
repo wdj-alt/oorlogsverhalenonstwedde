@@ -266,30 +266,32 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log('Locatie rechten veranderd naar:', permissionStatus.state);
     
             if (permissionStatus.state === 'granted') {
-                    const loadingDiv = document.getElementById("loading");
-                    const verhalenContainer = document.getElementById("verhalenContainer");
-                    if (loadingDiv) {
-                        loadingDiv.style.display = "block";
-                    }
+    const loadingDiv = document.getElementById("loading");
+    const verhalenContainer = document.getElementById("verhalenContainer");
 
-                    if (verhalenContainer) {
-                        verhalenContainer.style.display = "none";
-                    }
+    if (loadingDiv) {
+        loadingDiv.style.display = "block";
 
-                    // Refresh location immediately
-                    refreshLocation();
-
-                    // Optional: hide the loader again after a short delay
-                   setTimeout(() => {
-                       if (loadingDiv) {
-                           loadingDiv.style.display = "none";
-                       }
-                       if (verhalenContainer) {
-                        verhalenContainer.style.display = "block";
-                       }
-                   }, 4000); // 3 seconds placeholder
+        // Blijf laad icon laten showen ookal haalt de refresh hem periodiek weg
+        const keepVisibleInterval = setInterval(() => {
+            if (loadingDiv.style.display !== "block") {
+                loadingDiv.style.display = "block";
             }
-        };
+        }, 500);
+
+        // Na 4 sec is navigatie sowieso geladen
+        setTimeout(() => {
+            clearInterval(keepVisibleInterval);
+            loadingDiv.style.display = "none";
+            if (verhalenContainer) {
+                verhalenContainer.style.display = "block";
+            }
+        }, 4000);
+    }
+
+    refreshLocation();
+            }
+            
     });
 
     // Debug hidden, type ?debug=true in url
