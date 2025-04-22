@@ -56,7 +56,25 @@
             </div>
         </div>
         <div id="locationDisplay" class="text-center mt-3 mb-3" style="display:none;"></div>   
-        
+      
+        <!-- Dynamische modal voor navigeer naar verhaal + huidige afbeelding -->
+        <div class="modal fade" id="verhaalModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="verhaalModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content d-flex">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="verhaalModalLabel">Navigeer naar dit verhaal</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Sluiten"></button>
+              </div>
+              <div class="modal-body d-flex justify-content-center align-items-center" id="verhaalModalBody">
+            </div>
+            
+              <div class="modal-footer" id="verhaalModalFooter">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script src="js/modal.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="js/script.js"></script>
     </body>

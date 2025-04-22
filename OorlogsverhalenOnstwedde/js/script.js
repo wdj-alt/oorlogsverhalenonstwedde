@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         verhalen.forEach(verhaal => {
             const isUserLocationSet = userLat !== undefined && userLng !== undefined;
-            const route = `https://www.google.com/maps/dir/?api=1${isUserLocationSet ? `&origin=${userLat},${userLng}` : ''}&destination=${verhaal.locatie.lat},${verhaal.locatie.lng}`;
+            const route = `https://www.google.com/maps/dir/?api=1${isUserLocationSet ? `&origin=${userLat},${userLng}` : ''}&destination=${verhaal.locatie.lat},${verhaal.locatie.lng}&travelmode=walking`;
 
             const distance = getDistanceFromLatLonInKm(userLat, userLng, verhaal.locatie.lat, verhaal.locatie.lng);
 
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                             <a href="oorlogsverhaal.html?verhaal=${verhaal.id}" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center verhaal-link">Bekijk verhaal</a>
 
-                            <a href="${route}" target="_blank" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center route-link"> <i class="bi bi-geo-alt"></i> Route</a>
+                            <button class="card-link btn btn-dark shadow text-center route-link open-modal" data-route="${route}" data-huidige-afbeelding="${verhaal.huidigeAfbeelding}"><i class="bi bi-geo-alt-fill"></i> Route</button>
                         </div>
                     </div>
                 </div>
@@ -146,8 +146,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                                 <a href="oorlogsverhaal.html?verhaal=${verhaal.id}" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center verhaal-link disabled" style="pointer-events: none;" > <i class="bi bi-book"></i> Bekijk verhaal</a>
 
-                                <a href="${route}" target="_blank" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center route-link"> <i class="bi bi-geo-alt-fill"></i> Route</a>
-
+                                <button class="card-link btn btn-dark shadow text-center route-link open-modal" data-route="${route}" data-huidige-afbeelding="${verhaal.huidigeAfbeelding}"><i class="bi bi-geo-alt-fill"></i> Route</button>
+                
                                 <div class="alert alert-danger mt-3" role="alert" style="font-size: 0.7rem; font-weight:bold;">
                                     Je bent buiten het bereik van dit verhaal! Navigeer naar dit verhaal via de route!
                                 </div>
