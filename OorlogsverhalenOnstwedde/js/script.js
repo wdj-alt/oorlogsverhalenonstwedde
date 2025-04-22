@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             </h6>
                             
                             <div class="post-image-container mb-4">
-                                <img src="img/${verhaal.afbeelding}" alt="Verhaal afbeelding" class="img-fluid rounded mx-auto d-block shadow-2-strong">
+                                <img src="img/${verhaal.afbeelding}" alt="Verhaal afbeelding" class="img-fluid rounded mx-auto d-block shadow-2-strong" id="cardImg">
                             </div>    
 
                             <a href="oorlogsverhaal.html?verhaal=${verhaal.id}" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center verhaal-link">Bekijk verhaal</a>
@@ -141,14 +141,14 @@ document.addEventListener("DOMContentLoaded", () => {
                                 </h6>
                                 
                                 <div class="post-image-container mb-4">
-                                    <img src="img/${verhaal.afbeelding}" alt="Verhaal afbeelding" class="img-fluid rounded mx-auto d-block shadow-2-strong" style="width:250px;">
+                                    <img src="img/${verhaal.afbeelding}" alt="Verhaal afbeelding" class="img-fluid rounded mx-auto d-block shadow-2-strong" id="cardImg" style="width:250px;">
                                 </div>    
 
                                 <a href="oorlogsverhaal.html?verhaal=${verhaal.id}" data-lat="${verhaal.locatie.lat}" data-lng="${verhaal.locatie.lng}" class="card-link btn btn-dark shadow text-center verhaal-link disabled" style="pointer-events: none;" > <i class="bi bi-book"></i> Bekijk verhaal</a>
 
                                 <button class="card-link btn btn-dark shadow text-center route-link open-modal" data-route="${route}" data-huidige-afbeelding="${verhaal.huidigeAfbeelding}"><i class="bi bi-geo-alt-fill"></i> Route</button>
                 
-                                <div class="alert alert-danger mt-3" role="alert" style="font-size: 0.7rem; font-weight:bold;">
+                                <div class="alert alert-danger mt-4" role="alert" style="font-size: 0.7rem; font-weight:bold;">
                                     Je bent buiten het bereik van dit verhaal! Navigeer naar dit verhaal via de route!
                                 </div>
                             </div>
