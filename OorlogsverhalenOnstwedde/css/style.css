@@ -18,18 +18,27 @@ body {
     background-attachment: fixed;
     background-position: center center;
     min-height: 100vh;
-}
+} 
 
-nav {
+nav, footer {
     background-image: url("../img/bg/bg.jpg");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7); 
-    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.3);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 
-nav a{
+footer {
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.3);
+}
+
+footer p {
+    opacity: 0.9;
+}
+nav a, footer p{
     color: white !important;
     font-weight: 700;
     text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8);
@@ -74,4 +83,9 @@ nav a{
 
 #cardImg{
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+.accordion-button, .accordion-body {
+    background-color:#eedac9 !important;
+
 }

@@ -159,6 +159,12 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 verhalenContainer.innerHTML += storyHtml;
             }
+
+            const footer = document.getElementById("footer");
+
+            if (footer) {
+                footer.style.display = "block";
+            }
         });
 
         // Wanneer gescrolled moet worden naar een specifiek verhaal, wacht totdat alle verhalen zijn geladen en scroll daarna.
@@ -268,16 +274,21 @@ document.addEventListener("DOMContentLoaded", () => {
             if (permissionStatus.state === 'granted') {
             const loadingDiv = document.getElementById("loading");
             const verhalenContainer = document.getElementById("verhalenContainer");
+            const footer = document.getElementById("footer");
+
 
             // Laad laad icon zien en haal verhalencontainer weg, zodat de GPS te tijd heeft om te updaten en de verhalencontainer te refreshen.
             if (loadingDiv) {
                 loadingDiv.style.display = "block";
                 verhalenContainer.style.display = "none";
+                footer.style.display = "none";
+                
 
                 // Blijf laad icon laten showen ookal haalt de refresh hem periodiek weg
                 const keepVisibleInterval = setInterval(() => {
                     if (loadingDiv.style.display !== "block") {
                         loadingDiv.style.display = "block";
+                        footer.style.display = "none";
                     }
                 }, 300);
 
@@ -287,6 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     loadingDiv.style.display = "none";
                     if (verhalenContainer) {
                         verhalenContainer.style.display = "block";
+                        footer.style.display = "block";
                     }
                 }, 3000);
              }
